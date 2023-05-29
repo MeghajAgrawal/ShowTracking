@@ -1,0 +1,12 @@
+
+<div class="container">
+
+    <h3 class="d-flex justify-content-center"> Show Tracking </h3>
+    <table class = "table table-striped">
+        <tbody>
+            <tr *ngFor="let animeItem of animeList">
+                <td>{{animeItem.name}}</td>
+                <td>{{animeItem.anime_id}}</td>
+            </tr>
+        </tbody>
+    </table>

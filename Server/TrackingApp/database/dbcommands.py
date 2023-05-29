@@ -13,10 +13,7 @@ def insertAnime(animeData):
             return True
     except Exception as e:
         return e
-
-def deleteAnime():
-    print()
-
+    
 ## Episode Commands
 
 def insertEpisode(episodeData):
@@ -28,7 +25,6 @@ def insertEpisode(episodeData):
         return True
     except Exception as e:
         return e
-
 
 def updateEpisode():
     pass
@@ -45,3 +41,6 @@ def addUserAnimeRelation(data):
             return True
     except Exception as e:
         return e
+
+def deleteUserAnimeRelation():
+    print()

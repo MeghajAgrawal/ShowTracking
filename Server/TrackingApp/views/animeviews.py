@@ -16,10 +16,10 @@ from TrackingApp.services import animeservices
 def animeAPI(request):
     if request.method == 'GET':
         data = getAnimesByName(request)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         data = postAnime(request)
-    else:
-        pass
+    if request.method == 'DELETE':
+        data = deleteAnime(request)
     return data
 
 def getAnimesByName(request):
@@ -28,11 +28,16 @@ def getAnimesByName(request):
     print(data)
     return JsonResponse(data,safe=False)
 
-# Get Anime By Id
-def getAnimeByID(request,id):
+def getAnimeByID(request,animeID):
     if request.method == 'GET':
-        data = animeservices.getAnimeByID(id)
+        data = animeservices.getAnimeByID(animeID)
         print(data)
+        return JsonResponse(data,safe=False)
+    pass
+
+def getAnimeListByUserID(request, userID):
+    if request.method == 'GET':
+        data = animeservices.getAnimeListByUserID(userID)
         return JsonResponse(data,safe=False)
     pass
 
@@ -44,27 +49,43 @@ def displayAnimeList(request):
         return JsonResponse(anime_serializer.data,safe=False)
     pass
 
-def displayAnimeEpisodes(request,id):
+def postAnime(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        status = animeservices.addAnime(data)
+    return status
+
+def deleteAnime(request):
+    # Delete Anime from personal list
+    # Needs User ID
+    if request.method == "DELETE":
+        data = JSONParser().parse(request)
+        status = animeservices.deleteAnime(data)
+    return status
+
+
+@csrf_exempt
+def episodeAPI(request,id):
+    if request.method == 'GET':
+        data = getEpisodeList(request,id)
+    elif request.method == 'POST':
+        data = postEpisode(request)
+    elif request.method == 'DELETE':
+        data = deleteEpisode(request)
+    return data
+
+def getEpisodeList(request,id):
     if request.method == 'GET':
         episodes = Episode.objects.filter(anime_id = id)
         episode_serializer = EpisodeSerializer(episodes, many= True)
         return JsonResponse(episode_serializer.data,safe=False)
 
-
-def postAnime(request):
-    # Add anime to personal list
-    # Needs User ID
-    if request.method == 'POST':
-        data = JSONParser().parse(request)
-        status = animeservices.addAnime(data)
+def postEpisode(request):
+    data = JSONParser().parse(request)
+    status = animeservices.addEpisode(data)
     return status
-    pass
-
-def deleteAnime(request):
-    # Delete Anime from personal list
-    # Needs User ID
-    pass
-
-
-
-
+    
+def deleteEpisode(request):
+    data = JSONParser().parse(request)
+    status = animeservices.deleteEpisode(data)
+    return status

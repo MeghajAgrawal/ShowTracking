@@ -1,0 +1,16 @@
+<mat-card *ngIf="anime" class="text-center">
+    <div class="w-full">
+        <img class="mb-1 mx-auto h-[600px]"
+        [src] = "anime.image" />
+        <div class = "flex justify-content-center text-wrap">
+            <h3> {{anime.name}}</h3>
+        </div>
+        <div class="">
+            <button class="btn shadow-none mb-2">
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+        </div>
+    </div>
+    
+
+</mat-card>

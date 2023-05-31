@@ -30,12 +30,12 @@ class Episode(models.Model):
     description = models.TextField(null=True)
     filler = models.BooleanField(default=False)
 
-# class UserAnimeEpisodeRelation(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     user = models.ForeignKey(User,on_delete= models.CASCADE)
-#     anime = models.ForeignKey(Anime,on_delete= models.CASCADE)
-#     episode = models.ForeignKey(Episode,on_delete= models.CASCADE)
-#     episode_watched = models.BooleanField(default=False)
+class UserAnimeEpisodeRelation(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User,on_delete= models.CASCADE)
+    anime = models.ForeignKey(Anime,on_delete= models.CASCADE)
+    episode = models.ForeignKey(Episode,on_delete= models.CASCADE)
+    episode_watched = models.BooleanField(default=True)
 
 # class Group(models.Model):
 #     group_id = models.AutoField(primary_key=True)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from TrackingApp.models import Anime,User,UserAnimeRelation,Episode
+from TrackingApp.models import Anime,User,UserAnimeRelation,Episode,UserAnimeEpisodeRelation
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,4 +37,13 @@ class EpisodeSerializer(serializers.ModelSerializer):
                   'name',
                   'description',
                   'filler')
+
+class UserAnimeEpisodeRelationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAnimeEpisodeRelation
+        fields = ('id',
+                  'user',
+                  'anime',
+                  'episode',
+                  'episode_watched')
 

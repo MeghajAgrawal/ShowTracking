@@ -13,7 +13,7 @@ export class AnimeApiService {
   constructor( private http:HttpClient) { }
 
   getAnimeList():Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl+'anime/display')
+    return this.http.get<any[]>(this.APIUrl+'anime/user/1')
   }
   getAnimebyName(val:any){
     return this.http.get<any[]>(this.APIUrl+'anime?name=',val)

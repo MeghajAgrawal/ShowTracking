@@ -13,6 +13,10 @@ def getAnimeByID(id):
     print("SERVICE:", data)
     return data
 
+def getAnimeListByUserID(userID):
+    data = dbcommands.getAnimeList(userID)    
+    return data
+
 def addAnime(data):
     if not(Anime.objects.filter(anime_id = data.get('anime_id')).exists()):
         print(Anime.objects.filter(anime_id = data.get('anime_id')).exists())
@@ -28,7 +32,21 @@ def addAnime(data):
     useranimeStatus = dbcommands.addUserAnimeRelation(data)
     if(useranimeStatus):
         return HttpResponse("200: User Anime Relation created")
-    else:
-        return HttpResponse("400 : Error") 
+    return HttpResponse("400 : Error") 
 
+def deleteAnime(data):
+    status = dbcommands.deleteUserAnimeRelation(data)
+    if(status):
+        return HttpResponse("200: Successfully Deleted Anime and User relation")
 
+def addEpisode(data):
+    status = dbcommands.addUserAnimeEpisodeRelation(data)
+    if status:
+        return HttpResponse("200 : Adding new watched episode relation")
+    return HttpResponse("404: Error")
+
+def deleteEpisode(data):
+    status = dbcommands.deleteUserAnimeEpisodeRelation(data)
+    if status:
+        return HttpResponse("200 : Deleted watched episode relation")
+    return HttpResponse("404: Error")

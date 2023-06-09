@@ -21,6 +21,7 @@ import { AnimeApiService } from './services/anime-api.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AnimeComponent } from './anime/anime.component';
 import { AnimedisplayComponent } from './anime/animedisplay/animedisplay.component';
+import { AnimecardsComponent } from './anime/animecards/animecards.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AnimedisplayComponent } from './anime/animedisplay/animedisplay.compone
     HomeComponent,
     NavbarComponent,
     AnimeComponent,
-    AnimedisplayComponent
+    AnimedisplayComponent,
+    AnimecardsComponent
   ],
   imports: [
     BrowserModule,

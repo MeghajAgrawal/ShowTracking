@@ -21,5 +21,8 @@ export class AnimeApiService {
   getAnimebyId(id:any){
     return this.http.get(this.APIUrl+'anime/',id)
   }
-
+  getEpisodebyAnimeId(id:any){
+    console.log(id)
+    return this.http.get(this.APIUrl+'anime/episodes/'+id)
+  }
 }

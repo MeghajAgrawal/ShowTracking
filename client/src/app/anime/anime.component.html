@@ -1,8 +1,15 @@
 <app-navbar></app-navbar>
 <div class="container">
-<mat-grid-list gutterSize="16" cols="4" rowHeight="450" >
-    <mat-grid-tile *ngFor="let animeItem of animeList">
-        <app-animedisplay [anime] = "animeItem"></app-animedisplay>
-    </mat-grid-tile>
-</mat-grid-list>
+    <div *ngIf="animeDisplayOpen; else animeDisplayClose" class = "animeDisplayRender">
+        <app-animedisplay (closeEventEmitter)="receiveReturn($event)" [anime] = "anime"></app-animedisplay>
+    </div>
+    <ng-template #animeDisplayClose>
+    <div class = "animeCardRender">
+        <mat-grid-list gutterSize="16" cols="4" rowHeight="450" >
+            <mat-grid-tile *ngFor="let animeItem of animeList">
+                <app-animecards (animeEventEmitter)="receiveAnimeDisplay($event)" [anime] = "animeItem"></app-animecards>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    </ng-template>
 </div>

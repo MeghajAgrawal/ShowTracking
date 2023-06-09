@@ -1,6 +1,6 @@
 export interface Anime
 {
-    id : number,
+    anime_id : number,
     name : string,
     image : string,
     episodes : number,

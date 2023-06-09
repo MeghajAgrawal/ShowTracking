@@ -1,16 +1,25 @@
-<mat-card *ngIf="anime" class="text-center">
-    <div class="w-full">
-        <img class="mb-1 mx-auto h-[600px]"
-        [src] = "anime.image" />
-        <div class = "flex justify-content-center text-wrap">
-            <h3> {{anime.name}}</h3>
-        </div>
-        <div class="">
-            <button class="btn shadow-none mb-2">
-                <mat-icon>add_circle_outline</mat-icon>
-            </button>
+<div *ngIf="anime" class="container">
+    <button type="button" class="btn btn-outline-primary me-2" (click)="onBackClick()">Back</button>
+    <div class="w-full mt-2 row" >
+        <div class="col-lg-3"><img class="mb-1 mt-2 mx-auto h-[600px]" [src] = "anime.image" /></div>
+        
+        <div  class = "flex col-lg-9"> 
+            <h3>{{anime.name}}</h3>
+            <span>{{anime.description}}</span>
         </div>
     </div>
-    
-
-</mat-card>
+    <div class = "w-full mt-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> Episode</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="episodeList">
+                <tr *ngFor="let episode of episodeList">
+                    <td>{{episode.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

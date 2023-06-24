@@ -35,9 +35,9 @@ def addUserAnimeRelation(data):
         return e
 
 def deleteUserAnimeRelation(data):
-    dataDeleted = UserAnimeRelation.objects.filter(Q(user_id = data.get('user_id')) & Q(anime_id = data.get('anime_id')))
-    if (dataDeleted):
-        dataDeleted.delete()
+    dataToBeDeleted = UserAnimeRelation.objects.filter(Q(user_id = data.get('user_id')) & Q(anime_id = data.get('anime_id')))
+    if dataToBeDeleted:
+        dataToBeDeleted.delete()
         return True
     else:
         return False
@@ -78,10 +78,10 @@ def addUserAnimeEpisodeRelation(data):
         return e
 
 def deleteUserAnimeEpisodeRelation(data):
-    dataDeleted = UserAnimeEpisodeRelation.objects.filter(Q(user_id = data.get('user_id')) & Q(episode_id = data.get('episode_id')))
-    print(dataDeleted)
-    if(dataDeleted):
-        dataDeleted.delete()
+    dataToBeDeleted = UserAnimeEpisodeRelation.objects.filter(Q(user_id = data.get('user_id')) & Q(episode_id = data.get('episode_id')))
+    #print(dataToBeDeleted)
+    if dataToBeDeleted:
+        dataToBeDeleted.delete()
         return True
     else:
         return False

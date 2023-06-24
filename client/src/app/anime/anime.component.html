@@ -7,7 +7,7 @@
     <div class = "animeCardRender">
         <mat-grid-list gutterSize="16" cols="4" rowHeight="450" >
             <mat-grid-tile *ngFor="let animeItem of animeList">
-                <app-animecards (animeEventEmitter)="receiveAnimeDisplay($event)" [anime] = "animeItem"></app-animecards>
+                <app-animecards (animeEventEmitter)="receiveAnimeDisplay($event)" [anime] = "animeItem" [userAnimeList]="animeIdList"></app-animecards>
             </mat-grid-tile>
         </mat-grid-list>
     </div>

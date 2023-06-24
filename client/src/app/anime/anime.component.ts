@@ -11,18 +11,22 @@ import { Anime } from './animemodel';
 export class AnimeComponent {
 
   animeList:any = [];
-  constructor(private service:AnimeApiService){}
+  animeIdList:any = []
   animeDisplayOpen: any = false;
   anime :  Anime | undefined
-
+  
+  constructor(private service:AnimeApiService){}
   ngOnInit():void
   {
     this.refreshAnimeList();
   }
 
   refreshAnimeList(){
-    this.service.getAnimeList().subscribe(data=>{
-      this.animeList = data;
+    this.service.getAnimeListForUser().subscribe(data=>{
+      data.forEach(element => {
+        this.animeList.push(element)
+        this.animeIdList.push(element['anime_id'])
+      });
     })
   }
   receiveAnimeDisplay($event) : any

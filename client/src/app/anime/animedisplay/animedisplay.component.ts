@@ -14,11 +14,13 @@ export class AnimedisplayComponent {
   animeBoolean: any = false
   episodeList:any = []
   constructor(private service:AnimeApiService){}
+  
   ngOnInit():void
   {
     console.log(this.anime)
     this.getEpisodeList();
   }
+  // Anime Episode List
   getEpisodeList(){
     if(this.anime)
     {
@@ -27,8 +29,9 @@ export class AnimedisplayComponent {
       })
     }
   }
+  //Event to False
   onBackClick(){
     this.closeEventEmitter.emit(false)
   }
-
+  
 }

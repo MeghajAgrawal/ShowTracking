@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.db.models import Q
 from rest_framework.parsers import JSONParser
 from rest_framework import serializers
 
-from TrackingApp.models import Anime,User,Episode
+from TrackingApp.models import Anime,User,Episode,UserAnimeRelation
 from TrackingApp.serializer import AnimeSerializer,UserSerializer,EpisodeSerializer
 from TrackingApp.services import animeservices
 
@@ -25,7 +26,6 @@ def animeAPI(request):
 def getAnimesByName(request):
     name = request.GET.get('name')
     data = animeservices.getAnimesByName(name)
-    print(data)
     return JsonResponse(data,safe=False)
 
 def getAnimeByID(request,animeID):
@@ -52,6 +52,7 @@ def displayAnimeList(request):
 def postAnime(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
+        print(data)
         status = animeservices.addAnime(data)
     return status
 
@@ -76,13 +77,15 @@ def episodeAPI(request,id):
 
 def getEpisodeList(request,id):
     if request.method == 'GET':
+        if not (Episode.objects.filter(anime_id = id).exists()):
+            error = animeservices.addEpisode(id)
         episodes = Episode.objects.filter(anime_id = id)
         episode_serializer = EpisodeSerializer(episodes, many= True)
         return JsonResponse(episode_serializer.data,safe=False)
 
 def postEpisode(request):
     data = JSONParser().parse(request)
-    status = animeservices.addEpisode(data)
+    status = animeservices.addEpisodeRelation(data)
     return status
     
 def deleteEpisode(request):

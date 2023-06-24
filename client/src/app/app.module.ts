@@ -14,14 +14,16 @@ import { MatIconModule,} from '@angular/material/icon'
 import { MatListModule,} from '@angular/material/list'
 import { MatTableModule,} from '@angular/material/table'
 import { MatSnackBarModule,} from '@angular/material/snack-bar'
+import { FormsModule } from '@angular/forms';
     
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AnimeApiService } from './services/anime-api.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AnimeComponent } from './anime/anime.component';
 import { AnimedisplayComponent } from './anime/animedisplay/animedisplay.component';
 import { AnimecardsComponent } from './anime/animecards/animecards.component';
+
+import { AnimeApiService } from './services/anime-api.service';
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { AnimecardsComponent } from './anime/animecards/animecards.component';
     MatListModule,
     MatTableModule,
     MatSnackBarModule,
+    FormsModule,
   ],
   providers: [AnimeApiService],
   bootstrap: [AppComponent]

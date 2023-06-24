@@ -19,34 +19,38 @@ def getAnimeListByUserID(userID):
 
 def addAnime(data):
     if not(Anime.objects.filter(anime_id = data.get('anime_id')).exists()):
-        print(Anime.objects.filter(anime_id = data.get('anime_id')).exists())
+        #print(Anime.objects.filter(anime_id = data.get('anime_id')).exists())
         animeData = (jikangateway.getAnimeByID(data.get('anime_id')))
-        animeStatus = dbcommands.insertAnime(animeData)
-        if not(animeStatus):
-            return HttpResponse("404 : Error")
-        episodeData = (jikangateway.getEpisodes(data.get('anime_id')))
-        episodeStatus = dbcommands.insertEpisode(episodeData)
-        if not(episodeStatus):
-            return HttpResponse("404 : Error")
-            
-    useranimeStatus = dbcommands.addUserAnimeRelation(data)
-    if(useranimeStatus):
-        return HttpResponse("200: User Anime Relation created")
-    return HttpResponse("400 : Error") 
+        animeError = dbcommands.insertAnime(animeData)
+        if not animeError:
+            return HttpResponse(status=404)
+        episodeError = addEpisode(data.get('anime_id'))
+        if not episodeError:
+            return HttpResponse(status=404)
+    
+    useranimeError = dbcommands.addUserAnimeRelation(data)
+    if useranimeError:
+        return HttpResponse( status=200)
+    return HttpResponse(status=204) 
 
 def deleteAnime(data):
     status = dbcommands.deleteUserAnimeRelation(data)
     if(status):
-        return HttpResponse("200: Successfully Deleted Anime and User relation")
+        return HttpResponse(status=200)
 
-def addEpisode(data):
+def addEpisode(id):
+    episodeData = jikangateway.getEpisodes(id)
+    episodeError = dbcommands.insertEpisode(episodeData)
+    return episodeError
+
+def addEpisodeRelation(data):
     status = dbcommands.addUserAnimeEpisodeRelation(data)
     if status:
-        return HttpResponse("200 : Adding new watched episode relation")
-    return HttpResponse("404: Error")
+        return HttpResponse(status=200)
+    return HttpResponse(status=404)
 
 def deleteEpisode(data):
     status = dbcommands.deleteUserAnimeEpisodeRelation(data)
     if status:
-        return HttpResponse("200 : Deleted watched episode relation")
-    return HttpResponse("404: Error")
+        return HttpResponse(status=200)
+    return HttpResponse(status=404)

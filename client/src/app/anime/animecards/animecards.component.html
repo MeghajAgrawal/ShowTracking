@@ -1,14 +1,17 @@
 <mat-card *ngIf="anime" class="text-center">
-    <div class="w-full" (click)="onClickAnime()">
-        <img class="mb-1 mt-2 mx-auto h-[600px]"
+    <div class="w-full" >
+        <img (click)="onClickAnime()" class="mb-1 mt-2 mx-auto h-[600px]"
         [src] = "anime.image" />
-        <div  class = "flex justify-content-center text-wrap"> 
+        <div (click)="onClickAnime()" class = "flex justify-content-center text-wrap"> 
             <h3>{{anime.name}}</h3>
         </div>
-        <div *ngIf="animeBoolean" class="">
-            <button class="btn shadow-none mb-2">
+        <div *ngIf="checkIfAnimeAdded(anime.anime_id); else animeNotAdded">
+            <mat-icon class="material-icons color_green">check_circle_outline</mat-icon>
+        </div>
+        <ng-template #animeNotAdded>
+            <button (click)="onAddButtonClick()" class="btn shadow-none mb-2">
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
-        </div>
+        </ng-template>
     </div>
 </mat-card>

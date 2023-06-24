@@ -2,22 +2,41 @@
     <button type="button" class="btn btn-outline-primary me-2" (click)="onBackClick()">Back</button>
     <div class="w-full mt-2 row" >
         <div class="col-lg-3"><img class="mb-1 mt-2 mx-auto h-[600px]" [src] = "anime.image" /></div>
-        
-        <div  class = "flex col-lg-9"> 
-            <h3>{{anime.name}}</h3>
-            <span>{{anime.description}}</span>
+        <div  class = "flex col-lg-6">
+            <div class="row">
+                <h2>{{anime.name}}</h2>
+                <span>{{anime.description}}</span>
+            </div>
+            <div class="row mt-2 mx-auto">
+                <mat-card class="text-center">
+                    <div class="w-full" >
+                        <span>Display next to watch details</span>
+                        <button class="btn shadow-none mb-2 mx-auto">
+                            <mat-icon>add_circle_outline</mat-icon>
+                        </button>
+                    </div>
+                </mat-card>
+            </div> 
         </div>
     </div>
-    <div class = "w-full mt-3">
+    <div class = "mt-3">
         <table class="table">
             <thead>
                 <tr>
-                    <th> Episode</th>
+                    <th>Episode no</th>
+                    <th>Episode name</th>
+                    <th>Episode watched ?</th>
                 </tr>
             </thead>
             <tbody *ngIf="episodeList">
                 <tr *ngFor="let episode of episodeList">
+                    <td>{{episode.episode_no}}</td>
                     <td>{{episode.name}}</td>
+                    <td>
+                        <button class="btn shadow-none mb-2">
+                            <mat-icon>add_circle_outline</mat-icon>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>

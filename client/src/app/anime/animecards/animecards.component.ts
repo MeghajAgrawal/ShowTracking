@@ -10,14 +10,13 @@ import { AnimeApiService } from 'src/app/services/anime-api.service';
 export class AnimecardsComponent {
   @Input() anime :  Anime | undefined
   @Input() userAnimeList: any
-  @Output() animeEventEmitter = new EventEmitter<Anime>();
-  animeBoolean: any = false
-  isAdded:any = false
+  @Output() animeEventEmitter = new EventEmitter<{}>();
   constructor(private service:AnimeApiService){}
 
   onClickAnime(){
     console.log("Card Clicked")
-    this.animeEventEmitter.emit(this.anime)
+    var animeData = {"anime":this.anime,"isAdded":this.checkIfAnimeAdded(this.anime?.anime_id)}
+    this.animeEventEmitter.emit(animeData)
   }
   onAddButtonClick(){
     var body = {"anime_id":this.anime?.anime_id , "user_id":1}

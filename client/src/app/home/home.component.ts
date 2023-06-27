@@ -15,6 +15,7 @@ export class HomeComponent {
   animeName:any = '';
   animeDisplayOpen: any = false;
   anime :  Anime | undefined
+  isAnimeAdded: any
 
   constructor(private service:AnimeApiService){}
   
@@ -41,7 +42,8 @@ export class HomeComponent {
   receiveAnimeDisplay($event) : any
   {
     this.animeDisplayOpen = true
-    this.anime = $event
+    this.anime = $event["anime"]
+    this.isAnimeAdded = $event["isAdded"]
   }
   receiveReturn($event):any
   {

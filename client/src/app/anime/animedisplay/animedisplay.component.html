@@ -8,7 +8,7 @@
                 <span>{{anime.description}}</span>
             </div>
             <div class="row mt-2 mx-auto">
-                <mat-card class="text-center">
+                <mat-card *ngIf="isAnimeAdded; else addAnimeCard" class="text-center">
                     <div class="w-full" >
                         <span>Display next to watch details</span>
                         <button class="btn shadow-none mb-2 mx-auto">
@@ -16,10 +16,20 @@
                         </button>
                     </div>
                 </mat-card>
+                <ng-template #addAnimeCard>
+                    <mat-card class="text-center">
+                        <div class="w-full" >
+                            <span> Add Anime to your Watchlist</span>
+                            <button (click)="onAddButtonClick()" class="btn shadow-none mb-2 mx-auto">
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card>
+                </ng-template>
             </div> 
         </div>
     </div>
-    <div class = "mt-3">
+    <div *ngIf="isAnimeAdded" class = "mt-3">
         <table class="table">
             <thead>
                 <tr>
@@ -33,9 +43,14 @@
                     <td>{{episode.episode_no}}</td>
                     <td>{{episode.name}}</td>
                     <td>
-                        <button class="btn shadow-none mb-2">
-                            <mat-icon>add_circle_outline</mat-icon>
-                        </button>
+                        <div class="justify-content-center" *ngIf="checkIfWatched(episode.episode_id); else AddButtonTemplate ">
+                            <mat-icon class="material-icons color_green">check_circle_outline</mat-icon>
+                        </div>
+                        <ng-template #AddButtonTemplate>
+                            <button (click)="addEpisodeButton(episode.episode_id)" class="btn shadow-none mb-2">
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </button>
+                        </ng-template>
                     </td>
                 </tr>
             </tbody>

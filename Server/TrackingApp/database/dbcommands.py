@@ -85,3 +85,12 @@ def deleteUserAnimeEpisodeRelation(data):
         return True
     else:
         return False
+
+def getEpisodeWatchedList(animeID,userID):
+    data = list(UserAnimeEpisodeRelation.objects.filter(Q(user_id = userID) & Q(anime_id = animeID)).select_related("episode"))
+    episodeList = []
+    for item in data:
+        episodeData = EpisodeSerializer(item.episode)
+        episodeList.append(episodeData.data['episode_id'])
+    return episodeList
+

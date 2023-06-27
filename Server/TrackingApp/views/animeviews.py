@@ -35,12 +35,6 @@ def getAnimeByID(request,animeID):
         return JsonResponse(data,safe=False)
     pass
 
-def getAnimeListByUserID(request, userID):
-    if request.method == 'GET':
-        data = animeservices.getAnimeListByUserID(userID)
-        return JsonResponse(data,safe=False)
-    pass
-
 def displayAnimeList(request):
     # Needs User ID
     if request.method == 'GET':
@@ -66,18 +60,20 @@ def deleteAnime(request):
 
 
 @csrf_exempt
-def episodeAPI(request,id):
+def episodeAPI(request):
     if request.method == 'GET':
-        data = getEpisodeList(request,id)
+        data = getEpisodeList(request)
     elif request.method == 'POST':
         data = postEpisode(request)
     elif request.method == 'DELETE':
         data = deleteEpisode(request)
     return data
 
-def getEpisodeList(request,id):
+def getEpisodeList(request):
     if request.method == 'GET':
+        id = request.GET.get('anime_id')
         if not (Episode.objects.filter(anime_id = id).exists()):
+            #print("Inside Episode Filter" , Episode.objects.filter(anime_id = id).exists(), id)
             error = animeservices.addEpisode(id)
         episodes = Episode.objects.filter(anime_id = id)
         episode_serializer = EpisodeSerializer(episodes, many= True)
@@ -92,3 +88,16 @@ def deleteEpisode(request):
     data = JSONParser().parse(request)
     status = animeservices.deleteEpisode(data)
     return status
+
+def getAnimeListByUserID(request, userID):
+    if request.method == 'GET':
+        data = animeservices.getAnimeListByUserID(userID)
+        return JsonResponse(data,safe=False)
+    pass
+
+def getEpisodeWatchedList(request):
+    if request.method == 'GET':
+        anime_id = request.GET.get('anime_id')
+        user_id = request.GET.get('user_id')
+        data = animeservices.getEpisodeWatchedList(anime_id,user_id)
+        return JsonResponse(data,safe=False)

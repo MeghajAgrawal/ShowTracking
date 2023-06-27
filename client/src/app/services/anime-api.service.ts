@@ -29,6 +29,16 @@ export class AnimeApiService {
 
   getEpisodebyAnimeId(id:any){
     console.log(id)
-    return this.http.get(this.APIUrl+'anime/episodes/'+id)
+    return this.http.get(this.APIUrl+'anime/episodes?anime_id='+id)
+  }
+
+  getEpisodeWatchedList(anime_id:any,user_id:any)
+  {
+    return this.http.get(this.APIUrl+'anime/user/episodes',{params:{'anime_id' : anime_id , 'user_id': user_id}})
+  }
+
+  postEpisode(data:any){
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+    return this.http.post<any>(this.APIUrl+'anime/episodes',JSON.stringify(data),{'headers':headers}).subscribe()
   }
 }

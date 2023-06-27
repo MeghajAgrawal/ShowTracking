@@ -40,6 +40,7 @@ def deleteAnime(data):
 
 def addEpisode(id):
     episodeData = jikangateway.getEpisodes(id)
+    #print(episodeData)
     episodeError = dbcommands.insertEpisode(episodeData)
     return episodeError
 
@@ -47,10 +48,14 @@ def addEpisodeRelation(data):
     status = dbcommands.addUserAnimeEpisodeRelation(data)
     if status:
         return HttpResponse(status=200)
-    return HttpResponse(status=404)
+    return HttpResponse(status=204)
 
 def deleteEpisode(data):
     status = dbcommands.deleteUserAnimeEpisodeRelation(data)
     if status:
         return HttpResponse(status=200)
-    return HttpResponse(status=404)
+    return HttpResponse(status=204)
+
+def getEpisodeWatchedList(animeID,userID):
+    data = dbcommands.getEpisodeWatchedList(animeID,userID)
+    return data

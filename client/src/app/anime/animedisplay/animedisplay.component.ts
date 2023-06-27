@@ -9,17 +9,24 @@ import { AnimeApiService } from '../../services/anime-api.service';
 })
 export class AnimedisplayComponent {
   @Input() anime :  Anime | undefined
+  @Input() isAnimeAdded: any
   @Output() closeEventEmitter = new EventEmitter<boolean>();
 
   animeBoolean: any = false
+  userWatchedList:any = []
   episodeList:any = []
   constructor(private service:AnimeApiService){}
   
   ngOnInit():void
   {
     console.log(this.anime)
-    this.getEpisodeList();
+    if(this.isAnimeAdded)
+    {
+      this.getEpisodeList();
+      this.getEpisodeWatchedList();
+    }
   }
+  
   // Anime Episode List
   getEpisodeList(){
     if(this.anime)
@@ -29,9 +36,34 @@ export class AnimedisplayComponent {
       })
     }
   }
+  getEpisodeWatchedList(){
+    if(this.anime){
+      this.service.getEpisodeWatchedList(this.anime.anime_id,1).subscribe(data=>{
+        this.userWatchedList = data;
+      })
+    }
+  }
+  checkIfWatched(episode_id){
+    for (let index = 0; index < this.userWatchedList.length; index++) {
+      if(episode_id == this.userWatchedList[index])
+        return true
+    }
+    return false;
+  }
+
+  onAddButtonClick(){
+    var body = {"anime_id":this.anime?.anime_id , "user_id":1}
+    console.log(body)
+    this.service.postAnime(body)
+  }
   //Event to False
   onBackClick(){
     this.closeEventEmitter.emit(false)
+  }
+
+  addEpisodeButton(episode_id:any){
+    var body = {"anime_id":this.anime?.anime_id , "user_id":1 , "episode_id":episode_id}
+    this.service.postEpisode(body)
   }
   
 }

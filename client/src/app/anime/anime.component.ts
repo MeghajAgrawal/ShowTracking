@@ -12,6 +12,7 @@ export class AnimeComponent {
 
   animeList:any = [];
   animeIdList:any = []
+  isAnimeAdded:any = false
   animeDisplayOpen: any = false;
   anime :  Anime | undefined
   
@@ -32,7 +33,8 @@ export class AnimeComponent {
   receiveAnimeDisplay($event) : any
   {
     this.animeDisplayOpen = true
-    this.anime = $event
+    this.anime = $event["anime"]
+    this.isAnimeAdded = $event["isAdded"]
   }
   receiveReturn($event):any
   {

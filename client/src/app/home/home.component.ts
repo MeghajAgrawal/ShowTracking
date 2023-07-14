@@ -32,7 +32,7 @@ export class HomeComponent {
   }
 
   refreshUserAnimeList(){
-    this.service.getAnimeListForUser().subscribe(data=>{
+    this.service.getAnimeListForUser(localStorage.getItem('userID')).subscribe(data=>{
       data.forEach(element => {
         this.userAnimeList.push(element['anime_id'])
       });

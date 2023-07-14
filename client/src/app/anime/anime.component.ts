@@ -21,9 +21,22 @@ export class AnimeComponent {
   {
     this.refreshAnimeList();
   }
+  
+  isLoggedIn(){
+    if(localStorage.getItem("userID")){
+      return true
+    }
+    return false
+  }
+  isEmpty(){
+    if(localStorage.getItem('userID') && this.animeList.length > 0){
+      return true
+    }
+    return false
+  }
 
   refreshAnimeList(){
-    this.service.getAnimeListForUser().subscribe(data=>{
+    this.service.getAnimeListForUser(localStorage.getItem('userID')).subscribe(data=>{
       data.forEach(element => {
         this.animeList.push(element)
         this.animeIdList.push(element['anime_id'])

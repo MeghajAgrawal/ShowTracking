@@ -19,7 +19,7 @@ export class AnimecardsComponent {
     this.animeEventEmitter.emit(animeData)
   }
   onAddButtonClick(){
-    var body = {"anime_id":this.anime?.anime_id , "user_id":1}
+    var body = {"anime_id":this.anime?.anime_id , "user_id":localStorage.getItem('userID')}
     this.service.postAnime(body)
   }
 

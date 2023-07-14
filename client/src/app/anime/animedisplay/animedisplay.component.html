@@ -1,5 +1,9 @@
 <div *ngIf="anime" class="container">
-    <button type="button" class="btn btn-outline-primary me-2" (click)="onBackClick()">Back</button>
+    <div class="flex w-full row">
+        <button type="button" class=" col-lg-1 btn btn-outline-primary me-2" (click)="onBackClick()">Back</button>
+        <div class="col-lg-9"></div>
+        <button  type="button" *ngIf="isAnimeAdded" class=" justify-content-end col-lg-1 btn btn-danger me-2" (click)="onRemoveButtonClick()">Remove</button>
+    </div>
     <div class="w-full mt-2 row" >
         <div class="col-lg-3"><img class="mb-1 mt-2 mx-auto h-[600px]" [src] = "anime.image" /></div>
         <div  class = "flex col-lg-6">
@@ -44,7 +48,9 @@
                     <td>{{episode.name}}</td>
                     <td>
                         <div class="justify-content-center" *ngIf="checkIfWatched(episode.episode_id); else AddButtonTemplate ">
-                            <mat-icon class="material-icons color_green">check_circle_outline</mat-icon>
+                            <button (click)="deleteEpisodeButton(episode.episode_id)" class="btn shadow-none mb-2">
+                                <mat-icon class="material-icons color_green">check_circle_outline</mat-icon>
+                            </button>
                         </div>
                         <ng-template #AddButtonTemplate>
                             <button (click)="addEpisodeButton(episode.episode_id)" class="btn shadow-none mb-2">

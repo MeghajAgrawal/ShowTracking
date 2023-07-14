@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container">
+    <div *ngIf="!isLoggedIn()" class="w-full flex-wrap justify-content-center text-center"><h3> Please log in to see your anime details</h3></div>
+    <div *ngIf="!isEmpty()" class="w-full flex-wrap text-center"><h3> You havent added any Anime </h3></div>
     <div *ngIf="animeDisplayOpen; else animeDisplayClose" class = "animeDisplayRender">
         <app-animedisplay (closeEventEmitter)="receiveReturn($event)" [anime] = "anime" [isAnimeAdded]="isAnimeAdded"></app-animedisplay>
     </div>

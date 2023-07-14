@@ -94,3 +94,33 @@ def getEpisodeWatchedList(animeID,userID):
         episodeList.append(episodeData.data['episode_id'])
     return episodeList
 
+
+## User Commands
+
+
+def addUser(userData):
+    uData = UserSerializer(data = userData)
+    print(uData)
+    try:
+        if uData.is_valid():
+            print("Is valid")
+            uData.save()
+            return True
+    except Exception as e:
+        return e
+
+def updateUser(userData):
+    currentUser = User.objects.get(user_id = userData['user_id'])
+    currentUser.name = userData['name']
+    currentUser.email = userData['email']
+    currentUser.dob = userData['dob']
+    currentUser.save()
+    return True
+
+def deleteUser(userID):
+    userToBeDeleted = User.objects.get(user_id = userID)
+    if userToBeDeleted:
+        userToBeDeleted.delete()
+        return True
+    return False
+

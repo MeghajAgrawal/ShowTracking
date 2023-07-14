@@ -1,0 +1,53 @@
+<div class="card m-4 mt-3">
+    <h4 class="card-header">Register</h4>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" formControlName="fullname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['fullname'].errors }" />
+                <div *ngIf="submitted && f['fullname'].errors" class="invalid-feedback">
+                    <div *ngIf="f['fullname'].errors?.['required']">Full Name is required</div>
+                    <div *ngIf="f['fullname'].errors?.['maxLength']">Full Name can be only 40 characters</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">User Name</label>
+                <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                    <div *ngIf="f['username'].errors?.['required']">User Name is required</div>
+                    <div *ngIf="f['username'].errors?.['maxLength']">User Name can be only 40 characters</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors?.['required']">Email is required</div>
+                    <div *ngIf="f['email'].errors?.['email']">Enter a Valid Email</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['dob'].errors }" />
+                <div *ngIf="submitted && f['dob'].errors" class="invalid-feedback">
+                    <div *ngIf="f['dob'].errors?.['required']">Date of Birth is required</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors?.['required']">Password is required</div>
+                    <div *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters</div>
+                </div>
+            </div>
+            <div>
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                    Register
+                </button>
+                <a routerLink="../login" class="btn btn-link">Login</a>
+            </div>
+        </form>
+    </div>
+</div>

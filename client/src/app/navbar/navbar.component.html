@@ -5,16 +5,21 @@
     </a>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+      <li><a href="/" class="nav-link px-2 link-dark">Home</a></li>
       <li><a href="anime" class="nav-link px-2 link-dark">Anime</a></li>
       <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
       <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
       <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
     </ul>
-
-    <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-primary me-2">Login</button>
-      <button type="button" class="btn btn-primary">Sign-up</button>
+    <div *ngIf="loggedIn ;else NotLoggedIn" class="col-md-3 text-end">
+        <a href="account"><button class="btn shadow-none mb-2"><mat-icon>account_circle</mat-icon></button></a>
+        <button class="btn shadow-none mb-2" (click)="logout()"><mat-icon>power_settings_new</mat-icon></button>
     </div>
+    <ng-template #NotLoggedIn >
+    <div class="col-md-3 text-end">
+      <a href="login"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+      <a href="register"><button type="button" class="btn btn-primary">Sign-up</button></a>
+    </div>
+    </ng-template>
   </header>
 </div>

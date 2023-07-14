@@ -7,6 +7,7 @@ urlpatterns=[
     re_path(r'^anime/([0-9]+)$',animeviews.getAnimeByID),
     re_path(r'^anime/episodes$',animeviews.episodeAPI),
     re_path(r'^anime/user/([0-9]+)$',animeviews.getAnimeListByUserID),
-    re_path(r'^anime/user/episodes$',animeviews.getEpisodeWatchedList)
-    
+    re_path(r'^anime/user/episodes$',animeviews.getEpisodeWatchedList),
+    re_path(r'^user$',userviews.userAPI),
+    re_path(r'^login$',userviews.loginUser)
 ]

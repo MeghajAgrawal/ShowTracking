@@ -14,7 +14,7 @@ import { MatIconModule,} from '@angular/material/icon'
 import { MatListModule,} from '@angular/material/list'
 import { MatTableModule,} from '@angular/material/table'
 import { MatSnackBarModule,} from '@angular/material/snack-bar'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -22,8 +22,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AnimeComponent } from './anime/anime.component';
 import { AnimedisplayComponent } from './anime/animedisplay/animedisplay.component';
 import { AnimecardsComponent } from './anime/animecards/animecards.component';
+import { AccountComponent } from './account/account.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 import { AnimeApiService } from './services/anime-api.service';
+import { UserApiService } from './services/user-api.service';
 
 
 @NgModule({
@@ -33,7 +37,10 @@ import { AnimeApiService } from './services/anime-api.service';
     NavbarComponent,
     AnimeComponent,
     AnimedisplayComponent,
-    AnimecardsComponent
+    AnimecardsComponent,
+    AccountComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,8 +57,9 @@ import { AnimeApiService } from './services/anime-api.service';
     MatTableModule,
     MatSnackBarModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [AnimeApiService],
+  providers: [AnimeApiService , UserApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -52,9 +52,14 @@ export class AnimedisplayComponent {
   }
 
   onAddButtonClick(){
-    var body = {"anime_id":this.anime?.anime_id , "user_id":1}
+    var body = {"anime_id":this.anime?.anime_id , "user_id":localStorage.getItem('userID')}
     console.log(body)
     this.service.postAnime(body)
+  }
+
+  onRemoveButtonClick(){
+    var body = {"anime_id":this.anime?.anime_id , "user_id":localStorage.getItem('userID')}
+    this.service.deleteAnime(body)
   }
   //Event to False
   onBackClick(){
@@ -62,8 +67,12 @@ export class AnimedisplayComponent {
   }
 
   addEpisodeButton(episode_id:any){
-    var body = {"anime_id":this.anime?.anime_id , "user_id":1 , "episode_id":episode_id}
+    var body = {"anime_id":this.anime?.anime_id , "user_id":localStorage.getItem('userID') , "episode_id":episode_id}
     this.service.postEpisode(body)
   }
-  
+
+  deleteEpisodeButton(episode_id:any){
+    var body = {"anime_id":this.anime?.anime_id , "user_id":localStorage.getItem('userID') , "episode_id":episode_id}
+    this.service.deleteEpisode(body)
+  }
 }

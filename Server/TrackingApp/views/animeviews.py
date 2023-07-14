@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from django.db.models import Q
 from rest_framework.parsers import JSONParser
-from rest_framework import serializers
 
-from TrackingApp.models import Anime,User,Episode,UserAnimeRelation
-from TrackingApp.serializer import AnimeSerializer,UserSerializer,EpisodeSerializer
+from TrackingApp.models import Anime,Episode
+from TrackingApp.serializer import AnimeSerializer,EpisodeSerializer
 from TrackingApp.services import animeservices
 
 # Create your views here.
